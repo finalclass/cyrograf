@@ -1,0 +1,65 @@
+{
+  "format": 1,
+  "types": {
+    "Empty": { "struct": [] },
+    "VoidBox": { "struct": [{ "name": "value", "type": "void" }] },
+    "Reservation": { "struct": [{ "name": "id", "type": "string" }] },
+    "Problem": {
+      "struct": [
+        { "name": "code", "type": "string" },
+        { "name": "message", "type": "string" }
+      ]
+    },
+    "ReserveRequest": {
+      "struct": [
+        { "name": "owner_id", "type": "string" },
+        { "name": "quantity", "type": "int" },
+        { "name": "note", "type": "string", "optional": true }
+      ]
+    },
+    "ReserveResponse": {
+      "variant": [
+        { "tag": "Reserved", "type": "Reservation" },
+        { "tag": "Rejected", "type": "Problem" },
+        { "tag": "Unavailable", "type": "void" }
+      ]
+    },
+    "ReservationBatch": {
+      "struct": [{ "name": "items", "type": { "list": "Reservation" } }]
+    },
+    "ListBox": {
+      "struct": [{ "name": "items", "type": { "list": "Reservation" }, "optional": true }]
+    },
+    "ResponseBox": {
+      "struct": [{ "name": "response", "type": "ReserveResponse", "optional": true }]
+    },
+    "UserCtx": { "struct": [{ "name": "user_id", "type": "string" }] },
+    "Wrapper": {
+      "struct": [
+        { "name": "context", "type": "UserCtx" },
+        { "name": "label", "type": "string", "optional": true }
+      ]
+    },
+    "Blob": {
+      "struct": [{ "name": "id", "type": "string" }, { "name": "data", "type": "record" }]
+    },
+    "Guard": {
+      "struct": [
+        { "name": "upper", "type": "int" },
+        { "name": "lower", "type": "int" },
+        { "name": "ratio", "type": "float" },
+        { "name": "label", "type": "string" }
+      ]
+    },
+    "Scalars": {
+      "struct": [
+        { "name": "count", "type": "int" },
+        { "name": "ratio", "type": "float" },
+        { "name": "enabled", "type": "bool" },
+        { "name": "name", "type": "string" },
+        { "name": "date", "type": "date" }
+      ]
+    },
+    "UnicodeTag": { "variant": [{ "tag": "Żółw", "type": "string" }] }
+  }
+}

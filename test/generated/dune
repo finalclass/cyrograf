@@ -1,0 +1,12 @@
+(rule
+ (targets orders.ml orders.mli common.ml common.mli numbers.ml numbers.mli drut_runtime.ml)
+ (deps
+  (source_tree ../fixtures/orders)
+  %{exe:../gen/gen.exe})
+ (action
+  (run %{exe:../gen/gen.exe} ../fixtures/orders . ocaml)))
+
+(library
+ (name generated_fixtures)
+ (libraries cyrograf yojson)
+ (modules orders common numbers drut_runtime))

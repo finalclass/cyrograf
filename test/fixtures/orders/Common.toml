@@ -1,0 +1,15 @@
+[msg.UserCtx.struct]
+user_id = "string"
+
+[msg.Wrapper.struct]
+ctx = "Common.UserCtx"
+label = { type = "string", optional = true }
+
+[msg.Blob.struct]
+name = "string"
+data = "record"
+
+[msg.Empty.struct]
+
+[msg.VoidBox.struct]
+nothing = "void"

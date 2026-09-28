@@ -1,0 +1,25 @@
+.vscode-body pre.cyrograf code {
+  display: block;
+}
+
+.cy-keyword,
+.cy-storage {
+  color: var(--vscode-charts-blue, #569cd6);
+}
+
+.cy-entity {
+  color: var(--vscode-charts-green, #4ec9b0);
+}
+
+.cy-variable {
+  color: var(--vscode-charts-blue, #9cdcfe);
+}
+
+.cy-comment {
+  color: var(--vscode-descriptionForeground, #6a9955);
+  font-style: italic;
+}
+
+.cy-punctuation {
+  color: var(--vscode-editor-foreground);
+}

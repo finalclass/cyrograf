@@ -1,0 +1,47 @@
+{
+  "valid": [
+    {
+      "id": "extra_int_integral_spelling_list",
+      "type": { "list": "int" },
+      "wire": "[1.000, 1e0, 1.5e1, -0]",
+      "value": [1, 1, 15, 0]
+    },
+    {
+      "id": "extra_int_exponent_field",
+      "type": "Guard",
+      "wire": "[9.007199254740991e15,-0,1.5,\"x\"]",
+      "value": {
+        "upper": 9007199254740991,
+        "lower": 0,
+        "ratio": 1.5,
+        "label": "x"
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "id": "extra_leading_bom_value",
+      "type": "record",
+      "wire_hex": "efbbbf7b7d",
+      "reason": "A leading BOM is rejected."
+    },
+    {
+      "id": "extra_leading_bom_structure",
+      "type": "ReservationBatch",
+      "wire_hex": "efbbbf5b5b5d5d",
+      "reason": "A leading BOM is rejected before decoding."
+    },
+    {
+      "id": "extra_int_rounding_field",
+      "type": "Guard",
+      "wire": "[1.0000000000000001,0,1.5,\"x\"]",
+      "reason": "Exact decimal value is fractional even though binary64 rounds it."
+    },
+    {
+      "id": "extra_int_rounding_element",
+      "type": { "list": "int" },
+      "wire": "[1,1e-400]",
+      "reason": "A nested integer element still needs an exact value."
+    }
+  ]
+}

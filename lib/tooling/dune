@@ -1,0 +1,4 @@
+(library
+ (name cyrograf_tooling)
+ (public_name cyrograf.tooling)
+ (libraries cyrograf cyrograf_compiler unix))

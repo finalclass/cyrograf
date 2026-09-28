@@ -1,0 +1,4 @@
+(executable
+ (name contract_cli)
+ (public_name cyrograf)
+ (libraries cyrograf cyrograf_compiler cyrograf_tooling cyrograf_lsp unix))

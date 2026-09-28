@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  acceptance:
+    name: Build and acceptance
+    runs-on: ubuntu-24.04
+    env:
+      DUNE_FLAGS: --pkg=disabled
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      - name: Set up OCaml 5.4.1
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.4.1
+
+      - name: Install pinned Dune and libraries
+        run: opam install --yes dune.3.24.2 yojson otoml
+
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: 2.9.5
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.23.6
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: 3.13.4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Set up Rust 1.85
+        uses: dtolnay/rust-toolchain@1.85.0
+
+      - name: Install pinned mypy for the Python target
+        run: |
+          python3 -m venv "$HOME/.cache/cyrograf-toolchains/python/venv"
+          "$HOME/.cache/cyrograf-toolchains/python/venv/bin/pip" install --no-input "mypy==1.13.0"
+
+      - name: Fetch pinned editor test tools
+        run: opam exec -- make editors-tools
+
+      - name: Install editor test tooling
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes emacs vim xvfb libnss3 libgbm1 libasound2t64 \
+            libatk1.0-0t64 libatk-bridge2.0-0t64 libcups2t64 libxkbcommon0 \
+            libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libdrm2
+
+      - name: Install VS Code extension dependencies
+        run: npm ci
+        working-directory: editors/vscode
+
+      - name: Build
+        run: opam exec -- make build
+
+      - name: Check
+        run: opam exec -- make check
+
+      - name: Full acceptance
+        run: opam exec -- make test-all
+
+      - name: Packaged release
+        run: opam exec -- make test-release

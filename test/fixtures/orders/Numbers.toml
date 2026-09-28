@@ -1,0 +1,15 @@
+[msg.NumberBox.struct]
+items = { type = "list", of = "int" }
+counts = { type = "list", of = "int", optional = true }
+
+[msg.NumberChoice.variant]
+Bare = "int"
+Nothing = "void"
+
+[msg.NumberHolder.struct]
+number = "int"
+label = "string"
+
+[msg.NumberUser.struct]
+holder = "NumberHolder"
+maybe = { type = "NumberHolder", optional = true }

@@ -1,0 +1,17 @@
+{
+  "id": "cyrograf",
+  "name": "Cyrograf",
+  "programArgs": {
+    "default": "cyrograf lsp",
+    "windows": "cyrograf lsp"
+  },
+  "fileTypeMappings": [
+    {
+      "fileType": {
+        "name": "Cyrograf",
+        "patterns": ["*.cyrograf"]
+      },
+      "languageId": "cyrograf"
+    }
+  ]
+}

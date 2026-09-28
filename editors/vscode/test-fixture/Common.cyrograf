@@ -1,0 +1,4 @@
+// Shared project for editor example.
+struct Thing {
+  id: String
+}

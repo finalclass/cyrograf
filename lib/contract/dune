@@ -1,0 +1,4 @@
+(library
+ (name cyrograf)
+ (public_name cyrograf)
+ (libraries yojson))

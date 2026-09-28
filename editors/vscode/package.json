@@ -1,0 +1,100 @@
+{
+  "name": "cyrograf",
+  "displayName": "Cyrograf",
+  "description": "Cyrograf contract language support: TextMate highlighting and the cyrograf lsp server.",
+  "version": "0.1.0",
+  "publisher": "cyrograf",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/finalclass/cyrograf.git",
+    "directory": "editors/vscode"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "cyrograf",
+    "contracts"
+  ],
+  "activationEvents": [
+    "onLanguage:cyrograf"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "cyrograf",
+        "aliases": [
+          "Cyrograf",
+          "cyrograf"
+        ],
+        "extensions": [
+          ".cyrograf"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cyrograf",
+        "scopeName": "source.cyrograf",
+        "path": "./syntaxes/cyrograf.tmLanguage.json"
+      },
+      {
+        "scopeName": "markdown.cyrograf.codeblock",
+        "path": "./syntaxes/cyrograf.markdown.tmLanguage.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.cyrograf": "cyrograf"
+        }
+      }
+    ],
+    "markdown.markdownItPlugins": true,
+    "markdown.previewStyles": [
+      "./media/cyrograf.css"
+    ],
+    "configuration": {
+      "title": "Cyrograf",
+      "properties": {
+        "cyrograf.path": {
+          "type": "string",
+          "default": "cyrograf",
+          "markdownDescription": "Path to the `cyrograf` program. It may contain spaces; the command and its arguments are passed as a list, never through a shell."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "compile-tests": "tsc -p ./",
+    "pretest": "npm run compile && npm run compile-tests",
+    "test": "vscode-test",
+    "package": "vsce package --no-dependencies --out cyrograf-vscode.vsix"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.1",
+    "vscode-oniguruma": "^2.0.1",
+    "vscode-textmate": "^9.3.2"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "^20.11.30",
+    "@types/vscode": "^1.85.0",
+    "@vscode/test-cli": "^0.0.9",
+    "@vscode/test-electron": "^2.4.0",
+    "@vscode/vsce": "^3.2.1",
+    "esbuild": "^0.21.5",
+    "markdown-it": "^14.1.0",
+    "typescript": "^5.4.5"
+  }
+}

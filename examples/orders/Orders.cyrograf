@@ -1,0 +1,28 @@
+// Quick-start contract: messages, a variant and one descriptive RPC.
+struct ReserveRequest {
+  owner_id: String
+  quantity: Int
+  note?: String
+}
+
+struct Reservation {
+  id: String
+  item: Common.Thing
+}
+
+struct Problem {
+  code: String
+  message: String
+}
+
+variant ReserveResponse {
+  Reserved(Reservation)
+  Rejected(Problem)
+  Unavailable
+}
+
+struct ReservationBatch {
+  items: List<Reservation>
+}
+
+rpc reserve(ReserveRequest) -> ReserveResponse

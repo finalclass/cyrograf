@@ -1,0 +1,24 @@
+// Example reservation contracts for the editors.
+struct ReserveRequest {
+  owner_id: String
+  quantity: Int
+  note?: String
+}
+
+struct Reservation {
+  id: String
+  item: Common.Thing
+}
+
+struct Problem {
+  code: String
+  message: String
+}
+
+variant ReserveResponse {
+  Reserved(Reservation)
+  Rejected(Problem)
+  Unavailable
+}
+
+rpc reserve(ReserveRequest) -> ReserveResponse

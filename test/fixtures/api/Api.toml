@@ -1,0 +1,11 @@
+[msg.Choice.variant]
+Text = "string"
+Empty = "void"
+
+[msg.OptionalBox.struct]
+owner_id = "string"
+text = { type = "string", optional = true }
+count = { type = "int", optional = true }
+flag = { type = "bool", optional = true }
+items = { type = "list", of = "string", optional = true }
+choice = { type = "Choice", optional = true }

@@ -1,0 +1,4 @@
+(library
+ (name cyrograf_compiler)
+ (public_name cyrograf.compiler)
+ (libraries cyrograf otoml yojson))

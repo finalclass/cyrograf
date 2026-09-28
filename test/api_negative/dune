@@ -1,0 +1,19 @@
+(executable
+ (name positive)
+ (modules positive)
+ (libraries cyrograf generated_fixtures))
+
+(executable
+ (name negative_member)
+ (modules negative_member)
+ (libraries cyrograf generated_fixtures))
+
+(executable
+ (name negative_codec)
+ (modules negative_codec)
+ (libraries cyrograf generated_fixtures))
+
+(executable
+ (name negative_contract)
+ (modules negative_contract)
+ (libraries cyrograf generated_fixtures))

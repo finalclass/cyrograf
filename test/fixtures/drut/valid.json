@@ -1,0 +1,306 @@
+[
+  {
+    "id": "request_absent",
+    "type": "ReserveRequest",
+    "wire": "[\"owner-7\",2,null]",
+    "value": { "owner_id": "owner-7", "quantity": 2, "note": null }
+  },
+  {
+    "id": "request_present",
+    "type": "ReserveRequest",
+    "wire": "[\"owner-7\",2,\"hi\"]",
+    "value": { "owner_id": "owner-7", "quantity": 2, "note": "hi" }
+  },
+  {
+    "id": "request_empty_note",
+    "type": "ReserveRequest",
+    "wire": "[\"owner-7\",2,\"\"]",
+    "value": { "owner_id": "owner-7", "quantity": 2, "note": "" }
+  },
+  {
+    "id": "reservation",
+    "type": "Reservation",
+    "wire": "[\"r-9\"]",
+    "value": { "id": "r-9" }
+  },
+  {
+    "id": "problem",
+    "type": "Problem",
+    "wire": "[\"quota\",\"Limit\"]",
+    "value": { "code": "quota", "message": "Limit" }
+  },
+  {
+    "id": "variant_reserved",
+    "type": "ReserveResponse",
+    "wire": "[\"Reserved\",[\"r-9\"]]",
+    "value": { "tag": "Reserved", "payload": { "id": "r-9" } }
+  },
+  {
+    "id": "variant_rejected",
+    "type": "ReserveResponse",
+    "wire": "[\"Rejected\",[\"quota\",\"Limit\"]]",
+    "value": { "tag": "Rejected", "payload": { "code": "quota", "message": "Limit" } }
+  },
+  {
+    "id": "variant_void",
+    "type": "ReserveResponse",
+    "wire": "[\"Unavailable\",null]",
+    "value": { "tag": "Unavailable", "payload": null }
+  },
+  {
+    "id": "variant_escaped_tag",
+    "type": "ReserveResponse",
+    "wire": "[\"\\u0055navailable\",null]",
+    "value": { "tag": "Unavailable", "payload": null }
+  },
+  {
+    "id": "variant_unicode_tag",
+    "type": "UnicodeTag",
+    "wire": "[\"Żółw\",\"slow\"]",
+    "value": { "tag": "Żółw", "payload": "slow" }
+  },
+  {
+    "id": "batch_empty",
+    "type": "ReservationBatch",
+    "wire": "[[]]",
+    "value": { "items": [] }
+  },
+  {
+    "id": "batch_one",
+    "type": "ReservationBatch",
+    "wire": "[[[\"r-9\"]]]",
+    "value": { "items": [{ "id": "r-9" }] }
+  },
+  {
+    "id": "batch_order",
+    "type": "ReservationBatch",
+    "wire": "[[[\"second\"],[\"first\"]]]",
+    "value": { "items": [{ "id": "second" }, { "id": "first" }] }
+  },
+  {
+    "id": "optional_list_absent",
+    "type": "ListBox",
+    "wire": "[null]",
+    "value": { "items": null }
+  },
+  {
+    "id": "optional_list_empty",
+    "type": "ListBox",
+    "wire": "[[]]",
+    "value": { "items": [] }
+  },
+  {
+    "id": "optional_list_present",
+    "type": "ListBox",
+    "wire": "[[[\"r-9\"]]]",
+    "value": { "items": [{ "id": "r-9" }] }
+  },
+  {
+    "id": "optional_variant_absent",
+    "type": "ResponseBox",
+    "wire": "[null]",
+    "value": { "response": null }
+  },
+  {
+    "id": "optional_variant_present_void",
+    "type": "ResponseBox",
+    "wire": "[[\"Unavailable\",null]]",
+    "value": { "response": { "tag": "Unavailable", "payload": null } }
+  },
+  {
+    "id": "reference",
+    "type": "Wrapper",
+    "wire": "[[\"u-1\"],\"L\"]",
+    "value": { "context": { "user_id": "u-1" }, "label": "L" }
+  },
+  {
+    "id": "reference_optional_absent",
+    "type": "Wrapper",
+    "wire": "[[\"u-1\"],null]",
+    "value": { "context": { "user_id": "u-1" }, "label": null }
+  },
+  { "id": "empty_structure", "type": "Empty", "wire": "[]", "value": {} },
+  { "id": "void_field", "type": "VoidBox", "wire": "[null]", "value": { "value": null } },
+  { "id": "void_root", "type": "void", "wire": "null", "value": null },
+  { "id": "int_zero", "type": "int", "wire": "0", "value": 0 },
+  { "id": "int_negative_zero", "type": "int", "wire": "-0", "value": 0 },
+  {
+    "id": "int_max",
+    "type": "int",
+    "wire": "9007199254740991",
+    "value": 9007199254740991
+  },
+  {
+    "id": "int_min",
+    "type": "int",
+    "wire": "-9007199254740991",
+    "value": -9007199254740991
+  },
+  { "id": "int_integral_fraction", "type": "int", "wire": "1.000", "value": 1 },
+  { "id": "int_exponent", "type": "int", "wire": "1e0", "value": 1 },
+  { "id": "int_fraction_with_exponent", "type": "int", "wire": "1.5e1", "value": 15 },
+  {
+    "id": "int_max_exponent",
+    "type": "int",
+    "wire": "9.007199254740991e15",
+    "value": 9007199254740991
+  },
+  { "id": "float_fraction", "type": "float", "wire": "1.5", "value": 1.5 },
+  { "id": "float_integer_spelling", "type": "float", "wire": "2", "value": 2 },
+  { "id": "float_exponent", "type": "float", "wire": "1.25e+2", "value": 125 },
+  { "id": "float_negative_zero", "type": "float", "wire": "-0.0", "value": 0 },
+  { "id": "float_rounding", "type": "float", "wire": "1.0000000000000001", "value": 1 },
+  { "id": "float_underflow", "type": "float", "wire": "1e-400", "value": 0 },
+  { "id": "float_subnormal", "type": "float", "wire": "5e-324", "value": 5e-324 },
+  {
+    "id": "float_max",
+    "type": "float",
+    "wire": "1.7976931348623157e308",
+    "value": 1.7976931348623157e308
+  },
+  { "id": "bool_true", "type": "bool", "wire": "true", "value": true },
+  { "id": "bool_false", "type": "bool", "wire": "false", "value": false },
+  { "id": "string_empty", "type": "string", "wire": "\"\"", "value": "" },
+  { "id": "string_unicode", "type": "string", "wire": "\"żółw\"", "value": "żółw" },
+  {
+    "id": "string_unicode_escaped",
+    "type": "string",
+    "wire": "\"\\u017c\\u00f3\\u0142w\"",
+    "value": "żółw"
+  },
+  {
+    "id": "string_surrogate_pair",
+    "type": "string",
+    "wire": "\"\\ud83d\\ude00\"",
+    "value": "😀"
+  },
+  {
+    "id": "string_supplementary_utf8",
+    "type": "string",
+    "wire": "\"😀\"",
+    "value": "😀"
+  },
+  {
+    "id": "string_combining_preserved",
+    "type": "string",
+    "wire": "\"e\\u0301\"",
+    "value": "é"
+  },
+  {
+    "id": "string_escapes",
+    "type": "string",
+    "wire": "\"\\\"\\\\\\/\\b\\f\\n\\r\\t\\u0000\"",
+    "value": "\"\\/\b\f\n\r\t\u0000"
+  },
+  { "id": "string_bom_inside", "type": "string", "wire": "\"\\ufeff\"", "value": "﻿" },
+  {
+    "id": "date_label_only",
+    "type": "date",
+    "wire": "\"not-a-date\"",
+    "value": "not-a-date"
+  },
+  { "id": "date_empty", "type": "date", "wire": "\"\"", "value": "" },
+  { "id": "list_empty", "type": { "list": "int" }, "wire": "[]", "value": [] },
+  {
+    "id": "list_order",
+    "type": { "list": "int" },
+    "wire": "[3,1,2]",
+    "value": [3, 1, 2]
+  },
+  {
+    "id": "list_nested",
+    "type": { "list": { "list": "int" } },
+    "wire": "[[1,2],[],[3]]",
+    "value": [[1, 2], [], [3]]
+  },
+  {
+    "id": "list_void",
+    "type": { "list": "void" },
+    "wire": "[null,null]",
+    "value": [null, null]
+  },
+  { "id": "record_empty", "type": "record", "wire": "{}", "value": {} },
+  {
+    "id": "record_dynamic",
+    "type": "Blob",
+    "wire": "[\"b1\",{\"k\":[1,2],\"n\":null}]",
+    "value": { "id": "b1", "data": { "k": [1, 2], "n": null } }
+  },
+  {
+    "id": "record_key_order",
+    "type": "record",
+    "wire": "{\"z\":1,\"a\":2}",
+    "value": { "a": 2, "z": 1 }
+  },
+  {
+    "id": "record_nested",
+    "type": "record",
+    "wire": "{\"data\":[{\"ok\":true},null,\"x\",[false,1.5]]}",
+    "value": { "data": [{ "ok": true }, null, "x", [false, 1.5]] }
+  },
+  {
+    "id": "record_escaped_key",
+    "type": "record",
+    "wire": "{\"\\u0061\":1}",
+    "value": { "a": 1 }
+  },
+  {
+    "id": "record_distinct_normalizations",
+    "type": "record",
+    "wire": "{\"é\":1,\"e\\u0301\":2}",
+    "value": { "é": 1, "é": 2 }
+  },
+  {
+    "id": "record_prototype_key",
+    "type": "record",
+    "wire": "{\"__proto__\":{\"x\":1}}",
+    "value": { "__proto__": { "x": 1 } }
+  },
+  {
+    "id": "record_large_finite_number",
+    "type": "record",
+    "wire": "{\"n\":1e100}",
+    "value": { "n": 1e100 }
+  },
+  {
+    "id": "record_rounding",
+    "type": "record",
+    "wire": "{\"n\":9007199254740993}",
+    "value": { "n": 9007199254740992 }
+  },
+  {
+    "id": "record_separate_key_scopes",
+    "type": { "list": "record" },
+    "wire": "[{\"x\":1},{\"x\":2}]",
+    "value": [{ "x": 1 }, { "x": 2 }]
+  },
+  {
+    "id": "guard_bounds",
+    "type": "Guard",
+    "wire": "[9007199254740991,-9007199254740991,1.5,\"ascii\"]",
+    "value": {
+      "upper": 9007199254740991,
+      "lower": -9007199254740991,
+      "ratio": 1.5,
+      "label": "ascii"
+    }
+  },
+  {
+    "id": "all_scalars",
+    "type": "Scalars",
+    "wire": "[2,1.5,true,\"sample\",\"2026-09-27\"]",
+    "value": {
+      "count": 2,
+      "ratio": 1.5,
+      "enabled": true,
+      "name": "sample",
+      "date": "2026-09-27"
+    }
+  },
+  {
+    "id": "json_whitespace",
+    "type": "ReserveRequest",
+    "wire": " \t\r\n[ \"owner-7\" , 2 , null ]\n",
+    "value": { "owner_id": "owner-7", "quantity": 2, "note": null }
+  }
+]

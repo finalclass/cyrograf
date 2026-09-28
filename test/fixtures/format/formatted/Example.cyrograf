@@ -1,0 +1,32 @@
+// Reservation example preserved by the formatter.
+struct ReserveRequest {
+  owner_id: String
+  quantity: Int
+  note?: String // trailing comment
+}
+
+struct Empty {}
+
+variant ReserveResponse {
+  Reserved(Reservation)
+  Rejected(Problem)
+  Unavailable(Void)
+}
+
+struct Problem {
+  code: String
+  message: String
+}
+
+struct Reservation {
+  id: String
+}
+
+struct ReservationBatch {
+  items: List<
+    // the payload may stay multiline when a comment lives inside it
+    Reservation
+  >
+}
+
+rpc reserve(ReserveRequest) -> ReserveResponse

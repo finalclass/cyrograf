@@ -1,0 +1,4 @@
+// Shared messages for the editor example.
+struct Thing {
+  id: String
+}

@@ -1,0 +1,4 @@
+(library
+ (name cyrograf_lsp)
+ (public_name cyrograf.lsp)
+ (libraries cyrograf_tooling yojson unix))

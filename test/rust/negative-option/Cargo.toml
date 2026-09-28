@@ -1,0 +1,9 @@
+[package]
+name = "cyrograf_rust_negative_option"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[dependencies]
+generated_contracts = { path = "../rust" }

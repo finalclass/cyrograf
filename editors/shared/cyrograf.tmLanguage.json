@@ -1,0 +1,94 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Cyrograf",
+  "scopeName": "source.cyrograf",
+  "fileTypes": ["cyrograf"],
+  "uuid": "fd3bc303-6052-4ca8-9ba8-b818ec8fa32f",
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#primitives" },
+    { "include": "#declarations" },
+    { "include": "#method-names" },
+    { "include": "#field-names" },
+    { "include": "#type-names" },
+    { "include": "#operators" },
+    { "include": "#punctuation" }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.cyrograf",
+          "match": "//.*"
+        }
+      ]
+    },
+    "primitives": {
+      "patterns": [
+        {
+          "match": "(:\\s*|\\[\\s*|\\(\\s*|List\\s*<\\s*|<\\s*)(String|Int|Float|Bool|Void|Date|Record)\\b",
+          "captures": {
+            "1": { "name": "punctuation.cyrograf" },
+            "2": { "name": "storage.type.primitive.cyrograf" }
+          }
+        }
+      ]
+    },
+    "declarations": {
+      "patterns": [
+        {
+          "match": "\\b(struct|variant)\\b(?=\\s+[A-Z][A-Za-z0-9_]*)",
+          "name": "keyword.other.declaration.cyrograf"
+        },
+        {
+          "match": "\\brpc\\b(?=\\s+[a-z][A-Za-z0-9_]*)",
+          "name": "keyword.other.declaration.cyrograf"
+        }
+      ]
+    },
+    "method-names": {
+      "patterns": [
+        {
+          "match": "(?:\\brpc\\s+)([a-z][A-Za-z0-9_]*)",
+          "captures": {
+            "1": { "name": "entity.name.function.cyrograf" }
+          }
+        }
+      ]
+    },
+    "field-names": {
+      "patterns": [
+        {
+          "match": "^\\s*([a-z][A-Za-z0-9_]*)(?=\\s*\\??\\s*:)",
+          "captures": {
+            "1": { "name": "variable.other.member.cyrograf" }
+          }
+        }
+      ]
+    },
+    "type-names": {
+      "patterns": [
+        {
+          "match": "\\b[A-Z][A-Za-z0-9_]*\\b",
+          "name": "entity.name.type.cyrograf"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "match": "->",
+          "name": "keyword.operator.arrow.cyrograf"
+        }
+      ]
+    },
+    "punctuation": {
+      "patterns": [
+        {
+          "match": "[{}\\[\\]():?;.,<>]",
+          "name": "punctuation.cyrograf"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,6 @@
+[msg.Mix.struct]
+name = "string"
+blob = { type = "record", optional = true }
+voids = { type = "list", of = "void" }
+
+[msg.Empty.struct]

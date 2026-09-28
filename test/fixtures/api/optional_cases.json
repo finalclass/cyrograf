@@ -1,0 +1,10 @@
+[
+  { "id": "absent", "wire": "[\"o1\",null,null,null,null,null]" },
+  { "id": "empty_string", "wire": "[\"o1\",\"\",null,null,null,null]" },
+  { "id": "zero", "wire": "[\"o1\",null,0,null,null,null]" },
+  { "id": "false", "wire": "[\"o1\",null,null,false,null,null]" },
+  { "id": "empty_list", "wire": "[\"o1\",null,null,null,[],null]" },
+  { "id": "variant_text", "wire": "[\"o1\",null,null,null,null,[\"Text\",\"x\"]]" },
+  { "id": "variant_void", "wire": "[\"o1\",null,null,null,null,[\"Empty\",null]]" },
+  { "id": "all_present", "wire": "[\"o1\",\"\",0,false,[],[\"Empty\",null]]" }
+]

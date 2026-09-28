@@ -1,0 +1,143 @@
+[
+  {
+    "id": "schema_optional_void",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "struct": [{ "name": "value", "type": "void", "optional": true }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "Present void and absent value would both be null."
+  },
+  {
+    "id": "schema_empty_variant",
+    "schema": { "format": 1, "types": { "Bad": { "variant": [] } } },
+    "type": "Bad",
+    "reason": "A variant needs at least one constructor."
+  },
+  {
+    "id": "schema_duplicate_field",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": {
+          "struct": [{ "name": "x", "type": "int" }, { "name": "x", "type": "string" }]
+        }
+      }
+    },
+    "type": "Bad",
+    "reason": "Field names must be unique within a structure."
+  },
+  {
+    "id": "schema_duplicate_tag",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": {
+          "variant": [
+            { "tag": "Same", "type": "int" },
+            { "tag": "Same", "type": "string" }
+          ]
+        }
+      }
+    },
+    "type": "Bad",
+    "reason": "Variant tags must be unique."
+  },
+  {
+    "id": "schema_unresolved_reference",
+    "schema": {
+      "format": 1,
+      "types": { "Bad": { "struct": [{ "name": "x", "type": "Missing" }] } }
+    },
+    "type": "Bad",
+    "reason": "Reference has no declaration."
+  },
+  {
+    "id": "schema_unresolved_root",
+    "schema": { "format": 1, "types": {} },
+    "type": "Missing",
+    "reason": "Selected root type has no declaration."
+  },
+  {
+    "id": "schema_recursive_list",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "struct": [{ "name": "children", "type": { "list": "Bad" } }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "Named declarations cannot form cycles in Drut 1."
+  },
+  {
+    "id": "schema_mutual_cycle",
+    "schema": {
+      "format": 1,
+      "types": {
+        "A": { "struct": [{ "name": "b", "type": "B" }] },
+        "B": { "variant": [{ "tag": "Again", "type": "A" }] }
+      }
+    },
+    "type": "A",
+    "reason": "Cycle passes through both declarations."
+  },
+  {
+    "id": "schema_optional_variant_payload",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "variant": [{ "tag": "Maybe", "type": "string", "optional": true }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "Optionality is only a structure-field modifier."
+  },
+  {
+    "id": "schema_nested_optional",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": {
+          "struct": [{ "name": "x", "type": { "optional": "int" }, "optional": true }]
+        }
+      }
+    },
+    "type": "Bad",
+    "reason": "Optional is not a type expression; nested optionality is invalid."
+  },
+  {
+    "id": "schema_optional_list_element",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "struct": [{ "name": "x", "type": { "list": { "optional": "int" } } }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "List elements cannot use field optionality."
+  },
+  {
+    "id": "schema_two_kinds",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "struct": [], "variant": [{ "tag": "Empty", "type": "void" }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "A declaration has exactly one kind."
+  },
+  {
+    "id": "schema_optional_not_boolean",
+    "schema": {
+      "format": 1,
+      "types": {
+        "Bad": { "struct": [{ "name": "x", "type": "int", "optional": "true" }] }
+      }
+    },
+    "type": "Bad",
+    "reason": "The fixture notation requires a boolean flag."
+  }
+]

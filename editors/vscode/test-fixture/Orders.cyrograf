@@ -1,0 +1,4 @@
+// The unknown type on purpose: the extension host test expects a diagnostic.
+struct Order {
+  item: Common.Missing
+}

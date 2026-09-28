@@ -1,0 +1,11 @@
+// Shared messages used by the Orders example.
+struct UserCtx {
+  user_id: String
+}
+
+struct Thing {
+  id: String
+  label?: String
+}
+
+struct Empty {}

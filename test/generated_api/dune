@@ -1,0 +1,12 @@
+(rule
+ (targets api.ml api.mli drut_runtime.ml)
+ (deps
+  (source_tree ../fixtures/api)
+  %{exe:../gen/gen.exe})
+ (action
+  (run %{exe:../gen/gen.exe} ../fixtures/api . ocaml)))
+
+(library
+ (name generated_api)
+ (libraries cyrograf yojson)
+ (modules api drut_runtime))

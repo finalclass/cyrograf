@@ -1,0 +1,15 @@
+[package]
+name = "cyrograf_rust_tests"
+version = "0.0.0"
+edition = "2024"
+rust-version = "1.85"
+publish = false
+
+[[bin]]
+name = "cyrograf_rust_tests"
+path = "src/main.rs"
+
+[dependencies]
+generated_contracts = { path = "../rust" }
+serde = "=1.0.219"
+serde_json = "=1.0.140"

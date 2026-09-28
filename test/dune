@@ -1,0 +1,47 @@
+(test
+ (name contract_test)
+ (libraries cyrograf cyrograf_compiler generated_fixtures)
+ (deps
+  (source_tree fixtures/orders)))
+
+(test
+ (name roundtrip_test)
+ (libraries cyrograf generated_fixtures))
+
+(test
+ (name api_test)
+ (libraries cyrograf generated_api))
+
+(test
+ (name naming_test)
+ (libraries cyrograf cyrograf_compiler))
+
+(test
+ (name w1_profile_test)
+ (libraries cyrograf cyrograf_compiler generated_fixtures generated_fixtures_js))
+
+(executable
+ (name interop_ocaml)
+ (libraries cyrograf generated_fixtures yojson))
+
+(executable
+ (name optional_matrix)
+ (libraries cyrograf generated_api yojson))
+
+(executable
+ (name language_test)
+ (libraries cyrograf cyrograf_compiler))
+
+(executable
+ (name format_test)
+ (libraries cyrograf cyrograf_compiler cyrograf_tooling unix))
+
+(executable
+ (name migrate_test)
+ (libraries cyrograf cyrograf_compiler cyrograf_tooling unix))
+
+(executable
+ (name access_test)
+ (libraries cyrograf cyrograf_compiler cyrograf_tooling unix))
+
+(vendored_dirs api_negative)

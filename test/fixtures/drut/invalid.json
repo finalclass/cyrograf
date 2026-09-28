@@ -1,0 +1,413 @@
+[
+  { "id": "bad_empty_input", "type": "void", "wire": "", "reason": "No JSON value." },
+  {
+    "id": "bad_whitespace_only",
+    "type": "void",
+    "wire": " \n\t",
+    "reason": "No JSON value."
+  },
+  {
+    "id": "bad_truncated_json",
+    "type": "Empty",
+    "wire": "[",
+    "reason": "Incomplete array."
+  },
+  {
+    "id": "bad_trailing_value",
+    "type": "Empty",
+    "wire": "[] []",
+    "reason": "Two values in one decoder input."
+  },
+  {
+    "id": "bad_trailing_text",
+    "type": "Empty",
+    "wire": "[]x",
+    "reason": "Trailing non-whitespace."
+  },
+  {
+    "id": "bad_trailing_comma",
+    "type": { "list": "int" },
+    "wire": "[1,]",
+    "reason": "JSON forbids trailing commas."
+  },
+  {
+    "id": "bad_comment",
+    "type": "Empty",
+    "wire": "/* hi */[]",
+    "reason": "JSON forbids comments."
+  },
+  {
+    "id": "bad_single_quotes",
+    "type": "string",
+    "wire": "'x'",
+    "reason": "JSON strings require double quotes."
+  },
+  {
+    "id": "bad_leading_zero",
+    "type": "int",
+    "wire": "01",
+    "reason": "Invalid JSON number."
+  },
+  {
+    "id": "bad_leading_plus",
+    "type": "int",
+    "wire": "+1",
+    "reason": "Invalid JSON number."
+  },
+  { "id": "bad_nan", "type": "float", "wire": "NaN", "reason": "Not a JSON number." },
+  {
+    "id": "bad_infinity",
+    "type": "float",
+    "wire": "Infinity",
+    "reason": "Not a JSON number."
+  },
+  {
+    "id": "bad_negative_infinity",
+    "type": "float",
+    "wire": "-Infinity",
+    "reason": "Not a JSON number."
+  },
+  {
+    "id": "bad_utf8_leading_byte",
+    "type": "string",
+    "wire_hex": "22ff22",
+    "reason": "Invalid UTF-8 byte inside a string."
+  },
+  {
+    "id": "bad_utf8_truncated",
+    "type": "string",
+    "wire_hex": "22e28222",
+    "reason": "Truncated UTF-8 sequence."
+  },
+  {
+    "id": "bad_utf8_overlong",
+    "type": "string",
+    "wire_hex": "22c0af22",
+    "reason": "Overlong UTF-8 encoding."
+  },
+  {
+    "id": "bad_utf8_surrogate",
+    "type": "string",
+    "wire_hex": "22eda08022",
+    "reason": "UTF-8 cannot encode a surrogate code point."
+  },
+  {
+    "id": "bad_utf8_above_unicode",
+    "type": "string",
+    "wire_hex": "22f490808022",
+    "reason": "Code point exceeds U+10FFFF."
+  },
+  {
+    "id": "bad_unpaired_high_surrogate",
+    "type": "string",
+    "wire": "\"\\ud800\"",
+    "reason": "Not a Unicode scalar sequence."
+  },
+  {
+    "id": "bad_unpaired_low_surrogate",
+    "type": "string",
+    "wire": "\"\\udc00\"",
+    "reason": "Not a Unicode scalar sequence."
+  },
+  {
+    "id": "bad_unpaired_surrogate_key",
+    "type": "record",
+    "wire": "{\"\\ud800\":1}",
+    "reason": "Record keys must contain Unicode scalars."
+  },
+  {
+    "id": "bad_unescaped_control",
+    "type": "string",
+    "wire": "\"a\nb\"",
+    "reason": "A literal newline in a JSON string is invalid."
+  },
+  {
+    "id": "bad_duplicate_key",
+    "type": "record",
+    "wire": "{\"a\":1,\"a\":2}",
+    "reason": "Duplicate object key."
+  },
+  {
+    "id": "bad_duplicate_escaped_key",
+    "type": "record",
+    "wire": "{\"a\":1,\"\\u0061\":2}",
+    "reason": "Keys are equal after unescaping."
+  },
+  {
+    "id": "bad_duplicate_nested_key",
+    "type": "record",
+    "wire": "{\"outer\":[{\"x\":1,\"x\":2}]}",
+    "reason": "Duplicate keys are forbidden at every depth."
+  },
+  {
+    "id": "bad_duplicate_in_structure_record",
+    "type": "Blob",
+    "wire": "[\"b1\",{\"x\":1,\"x\":2}]",
+    "reason": "The rule also applies inside a declared structure."
+  },
+  {
+    "id": "bad_structure_object",
+    "type": "Reservation",
+    "wire": "{\"id\":\"r-9\"}",
+    "reason": "A structure must be an array."
+  },
+  {
+    "id": "bad_structure_missing",
+    "type": "Reservation",
+    "wire": "[]",
+    "reason": "Missing required position."
+  },
+  {
+    "id": "bad_structure_extra",
+    "type": "Reservation",
+    "wire": "[\"r-9\",0]",
+    "reason": "Extra position."
+  },
+  {
+    "id": "bad_optional_omitted",
+    "type": "ReserveRequest",
+    "wire": "[\"owner-7\",2]",
+    "reason": "Optional fields retain their position."
+  },
+  {
+    "id": "bad_required_null",
+    "type": "Reservation",
+    "wire": "[null]",
+    "reason": "Required string cannot be null."
+  },
+  {
+    "id": "bad_optional_type",
+    "type": "ReserveRequest",
+    "wire": "[\"owner-7\",2,false]",
+    "reason": "Present optional field must have its declared type."
+  },
+  {
+    "id": "bad_empty_structure_null",
+    "type": "Empty",
+    "wire": "null",
+    "reason": "Empty structure is an array."
+  },
+  {
+    "id": "bad_void_field",
+    "type": "VoidBox",
+    "wire": "[0]",
+    "reason": "Void accepts only null."
+  },
+  {
+    "id": "bad_void_root",
+    "type": "void",
+    "wire": "[]",
+    "reason": "Void accepts only null."
+  },
+  {
+    "id": "bad_reference_payload",
+    "type": "Wrapper",
+    "wire": "[\"u-1\",null]",
+    "reason": "Referenced structure still needs its array representation."
+  },
+  {
+    "id": "bad_variant_unknown",
+    "type": "ReserveResponse",
+    "wire": "[\"Missing\",null]",
+    "reason": "Undeclared tag."
+  },
+  {
+    "id": "bad_variant_case",
+    "type": "ReserveResponse",
+    "wire": "[\"unavailable\",null]",
+    "reason": "Tags are case-sensitive."
+  },
+  {
+    "id": "bad_variant_numeric_tag",
+    "type": "ReserveResponse",
+    "wire": "[0,null]",
+    "reason": "Tag must be a string."
+  },
+  {
+    "id": "bad_variant_missing_payload",
+    "type": "ReserveResponse",
+    "wire": "[\"Unavailable\"]",
+    "reason": "Variant needs exactly two elements."
+  },
+  {
+    "id": "bad_variant_extra_element",
+    "type": "ReserveResponse",
+    "wire": "[\"Unavailable\",null,0]",
+    "reason": "Variant needs exactly two elements."
+  },
+  {
+    "id": "bad_variant_object",
+    "type": "ReserveResponse",
+    "wire": "{\"Unavailable\":null}",
+    "reason": "Variant needs a tagged array."
+  },
+  {
+    "id": "bad_variant_payload_null",
+    "type": "ReserveResponse",
+    "wire": "[\"Reserved\",null]",
+    "reason": "Reserved requires a Reservation structure."
+  },
+  {
+    "id": "bad_variant_payload_other",
+    "type": "ReserveResponse",
+    "wire": "[\"Reserved\",[\"quota\",\"Limit\"]]",
+    "reason": "Payload belongs to a different constructor."
+  },
+  {
+    "id": "bad_variant_void_value",
+    "type": "ReserveResponse",
+    "wire": "[\"Unavailable\",false]",
+    "reason": "Void payload must be null."
+  },
+  { "id": "bad_int_fraction", "type": "int", "wire": "1.5", "reason": "Not an integer." },
+  {
+    "id": "bad_int_rounded_fraction",
+    "type": "int",
+    "wire": "1.0000000000000001",
+    "reason": "Exact decimal value is fractional even if binary64 rounds it to 1."
+  },
+  {
+    "id": "bad_int_underflow_fraction",
+    "type": "int",
+    "wire": "1e-400",
+    "reason": "A nonzero fraction cannot become a valid integer by underflow."
+  },
+  {
+    "id": "bad_int_rounded_boundary",
+    "type": "int",
+    "wire": "9007199254740991.1",
+    "reason": "Exact value is fractional and exceeds the upper bound."
+  },
+  {
+    "id": "bad_int_upper_bound",
+    "type": "int",
+    "wire": "9007199254740992",
+    "reason": "Outside the inclusive int range."
+  },
+  {
+    "id": "bad_int_lower_bound",
+    "type": "int",
+    "wire": "-9007199254740992",
+    "reason": "Outside the inclusive int range."
+  },
+  {
+    "id": "bad_int_huge",
+    "type": "int",
+    "wire": "1e400",
+    "reason": "Outside the int range."
+  },
+  {
+    "id": "bad_int_string",
+    "type": "int",
+    "wire": "\"1\"",
+    "reason": "No coercion from string."
+  },
+  {
+    "id": "bad_int_bool",
+    "type": "int",
+    "wire": "true",
+    "reason": "No coercion from boolean."
+  },
+  {
+    "id": "bad_float_overflow",
+    "type": "float",
+    "wire": "1e400",
+    "reason": "Binary64 conversion overflows to infinity."
+  },
+  {
+    "id": "bad_float_negative_overflow",
+    "type": "float",
+    "wire": "-1e400",
+    "reason": "Binary64 conversion overflows to infinity."
+  },
+  {
+    "id": "bad_float_null",
+    "type": "float",
+    "wire": "null",
+    "reason": "Float requires a number."
+  },
+  {
+    "id": "bad_float_string",
+    "type": "float",
+    "wire": "\"1.5\"",
+    "reason": "No coercion from string."
+  },
+  {
+    "id": "bad_bool_number",
+    "type": "bool",
+    "wire": "1",
+    "reason": "Boolean requires true or false."
+  },
+  {
+    "id": "bad_bool_string",
+    "type": "bool",
+    "wire": "\"false\"",
+    "reason": "No coercion from string."
+  },
+  {
+    "id": "bad_string_number",
+    "type": "string",
+    "wire": "1",
+    "reason": "String requires a JSON string."
+  },
+  {
+    "id": "bad_date_number",
+    "type": "date",
+    "wire": "2026",
+    "reason": "Date is encoded as a string."
+  },
+  {
+    "id": "bad_list_null",
+    "type": { "list": "int" },
+    "wire": "null",
+    "reason": "A list requires an array."
+  },
+  {
+    "id": "bad_list_object",
+    "type": { "list": "int" },
+    "wire": "{}",
+    "reason": "A list requires an array."
+  },
+  {
+    "id": "bad_list_element",
+    "type": { "list": "int" },
+    "wire": "[1,\"2\"]",
+    "reason": "Every element must satisfy the element type."
+  },
+  {
+    "id": "bad_list_nested_element",
+    "type": "ReservationBatch",
+    "wire": "[[[\"r-9\"],[false]]]",
+    "reason": "Nested structure field has the wrong type."
+  },
+  {
+    "id": "bad_record_array",
+    "type": "record",
+    "wire": "[]",
+    "reason": "Record root must be an object."
+  },
+  {
+    "id": "bad_record_null",
+    "type": "record",
+    "wire": "null",
+    "reason": "Record root must be an object."
+  },
+  {
+    "id": "bad_record_scalar",
+    "type": "record",
+    "wire": "42",
+    "reason": "Record root must be an object."
+  },
+  {
+    "id": "bad_record_overflow",
+    "type": "record",
+    "wire": "{\"a\":[1e400]}",
+    "reason": "Numbers inside records must also be finite."
+  },
+  {
+    "id": "bad_record_nested_unicode",
+    "type": "record",
+    "wire": "{\"a\":[\"\\udfff\"]}",
+    "reason": "Nested strings must also contain Unicode scalars."
+  }
+]
